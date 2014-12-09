@@ -1,0 +1,16 @@
+{
+  "name": "UnityCardboard",
+  "description": "Using Google Cardboard on the controllers unity example",
+  "version": "0.0.1",
+  "private": false,
+  "dependencies": {
+
+  },
+  "happyFunTimes": {
+    "gameId": "unitycardboard",
+    "category": "example",
+    "gameType": "Unity3D",
+    "apiVersion": "1.6.0",
+    "minPlayers": 1
+  }
+}
