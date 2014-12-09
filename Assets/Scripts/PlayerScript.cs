@@ -78,9 +78,6 @@ public class PlayerScript : MonoBehaviour {
         transform.localEulerAngles = data.rot;
     }
 
-    public Transform midTransform;
-    public Transform meshTransform;
-
     private NetPlayer m_netPlayer;
     private Vector3 m_position;
     private string m_name;
