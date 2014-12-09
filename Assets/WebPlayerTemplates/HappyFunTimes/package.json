@@ -10,7 +10,7 @@
     "gameId": "unitycardboard",
     "category": "example",
     "gameType": "Unity3D",
-    "apiVersion": "1.6.0",
+    "apiVersion": "1.7.0",
     "minPlayers": 1
   }
 }
