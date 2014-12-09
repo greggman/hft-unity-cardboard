@@ -61,7 +61,7 @@ namespace HappyFunTimes
         #if UNITY_EDITOR
         void RunHFT()
         {
-            string exePath = PlayerPrefs.GetString(kExeKey);
+            string exePath = UnityEditor.EditorPrefs.GetString(kExeKey);
 
             #if UNITY_EDITOR_OSX
                 if (System.String.IsNullOrEmpty(exePath) || (!Directory.Exists(exePath) && !(File.Exists(exePath)))) {
@@ -174,7 +174,7 @@ end tell
                 "/Applications",
                 "");
             if (!System.String.IsNullOrEmpty(path)) {
-                PlayerPrefs.SetString(kExeKey, path);
+                UnityEditor.EditorPrefs.SetString(kExeKey, path);
                 RunHFT();
             }
             #elif UNITY_EDITOR_WIN
@@ -183,7 +183,7 @@ end tell
                 System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles),
                 ".js");
             if (!System.String.IsNullOrEmpty(path)) {
-                PlayerPrefs.SetString(kExeKey, path);
+                UnityEditor.EditorPrefs.SetString(kExeKey, path);
                 RunHFT();
             }
             #endif
