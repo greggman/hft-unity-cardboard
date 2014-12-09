@@ -164,19 +164,6 @@ public class PlayerScript : MonoBehaviour {
         return new Quaternion(qx, qy, qz, qw);
     }
 
-    private void OnGUI()
-    {
-        if (m_orient != null) {
-            Vector2 size = new Vector2(100, 50);
-            Vector3 coords = Camera.main.WorldToScreenPoint(transform.position + m_offset);
-            m_rect.x = coords.x - size.x * 0.5f - 5f;
-            m_rect.y = Screen.height - coords.y;
-            m_guiStyle.normal.textColor = Color.black;
-            GUI.Box(m_rect, ("" + m_orient.alpha + " b: " + m_orient.beta + " g: " + m_orient.gamma), m_guiStyle);
-        }
-    }
-
-
     private void OnOrient(MessageOrient data) {
         //m_orient = data;
         //Matrix4x4 mesh = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(0, 0, -data.gamma), Vector3.one);
@@ -198,10 +185,6 @@ public class PlayerScript : MonoBehaviour {
     private NetPlayer m_netPlayer;
     private Vector3 m_position;
     private string m_name;
-    private MessageOrient m_orient;
-    private GUIStyle m_guiStyle = new GUIStyle();
-    private Rect m_rect = new Rect(0,0,0,0);
-    private Vector3 m_offset = new Vector3(0, 1.5f, 0);
 }
 
 }  // namespace HappyFunTimesExample
