@@ -70,6 +70,9 @@ requirejs([
   var cubeMaterial;
   var objects = {};
   var meshes = {};
+  var camRot = new THREE.Euler();
+  var oldRot = new THREE.Euler();
+  var camTick = 0;
 
   meshes.cone = new THREE.CylinderGeometry(
     0, 20, 40, 4, 1, false);
@@ -106,11 +109,11 @@ requirejs([
     controls.noPan = true;
 
     function sendOrientationToUnity(e) {
-      client.sendCmd('orient', {
-        alpha: e.alpha,
-        beta:  e.beta,
-        gamma: e.gamma,
-      });
+      //client.sendCmd('orient', {
+      //  alpha: e.alpha,
+      //  beta:  e.beta,
+      //  gamma: e.gamma,
+      //});
       if (controls.setOrientation) {
         controls.setOrientation(e);
       }
@@ -274,6 +277,18 @@ requirejs([
     resize();
 
     camera.updateProjectionMatrix();
+    // Only going to send at ~15fps
+    ++camTick;
+    if (camTick % 4 == 0) {
+      camRot.setFromQuaternion(camera.quaternion, 'YXZ');
+      client.sendCmd('rot', {
+        rot: {
+          x: camRot.x * 180 / Math.PI,
+          y: camRot.y * 180 / Math.PI,
+          z: camRot.z * 180 / Math.PI,
+        },
+      });
+    }
 
     cubeMesh.rotation.y += dt;
 
