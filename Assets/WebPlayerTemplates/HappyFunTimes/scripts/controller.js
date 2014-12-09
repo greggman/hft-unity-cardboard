@@ -317,5 +317,28 @@ requirejs([
       container.webkitRequestFullscreen();
     }
   }
+
+  var sendDeviceAcceleration = function(eventData) {
+    var accel    = eventData.acceleration || eventData.accelerationIncludingGravity;
+    var rot      = eventData.rotationRate || { alpha: 0, gamma: 0, beta: 0};
+    var interval = eventData.interval || 1;
+    var msg = {
+      x: quantize(accel.x   / interval),
+      y: quantize(accel.y   / interval),
+      z: quantize(accel.z   / interval),
+      a: quantize(rot.alpha / interval),
+      b: quantize(rot.beta  / interval),
+      g: quantize(rot.gamma / interval),
+    };
+
+    g_client.sendCmd('accel', msg);
+  };
+
+  if (!window.DeviceMotionEvent) {
+    alert("Your device/browser does not support device orientation. Sorry");
+    return;
+  }
+
+  window.addEventListener('devicemotion', sendDeviceAcceleration, false);
 });
 
