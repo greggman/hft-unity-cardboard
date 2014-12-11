@@ -318,6 +318,10 @@ requirejs([
     }
   }
 
+  var quantize = function(v) {
+    return Math.floor(v);
+  };
+
   var sendDeviceAcceleration = function(eventData) {
     var accel    = eventData.acceleration || eventData.accelerationIncludingGravity;
     var rot      = eventData.rotationRate || { alpha: 0, gamma: 0, beta: 0};
@@ -331,7 +335,7 @@ requirejs([
       g: quantize(rot.gamma / interval),
     };
 
-    g_client.sendCmd('accel', msg);
+    //client.sendCmd('accel', msg);
   };
 
   if (!window.DeviceMotionEvent) {
